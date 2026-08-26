@@ -508,14 +508,6 @@
                 <source />
                 <target>Tage</target>
             </trans-unit>
-            <trans-unit id="widgets.content_statistics.age_month">
-                <source />
-                <target>Monat</target>
-            </trans-unit>
-            <trans-unit id="widgets.content_statistics.age_months">
-                <source />
-                <target>Monate</target>
-            </trans-unit>
             <trans-unit id="widgets.content_statistics.age_year">
                 <source />
                 <target>Jahr</target>

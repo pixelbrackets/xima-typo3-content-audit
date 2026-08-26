@@ -224,7 +224,7 @@ class ContentStatisticsDataProvider implements ListDataProviderInterface
     }
 
     /**
-    * Formats a timestamp as a rough human age, e.g. "300 days" or "2 years, 4 months"
+    * Formats a timestamp as a rough human age using a single unit, e.g. "300 days" or "2.5 years"
     */
     private function formatAge(int $timestamp): string
     {
@@ -234,20 +234,19 @@ class ContentStatisticsDataProvider implements ListDataProviderInterface
 
         $interval = (new \DateTimeImmutable('@' . $timestamp))->diff(new \DateTimeImmutable());
 
-        if ($interval->y === 0) {
-            return $this->formatUnit(max(1, $interval->days), 'age_day', 'age_days');
+        if ($interval->y > 0) {
+            return $this->formatUnit($interval->y + $interval->m / 12, 'age_year', 'age_years');
         }
 
-        $years = $this->formatUnit($interval->y, 'age_year', 'age_years');
-
-        return $interval->m > 0 ? $years . ', ' . $this->formatUnit($interval->m, 'age_month', 'age_months') : $years;
+        return $this->formatUnit(max(1, $interval->days), 'age_day', 'age_days');
     }
 
-    private function formatUnit(int $count, string $singularKey, string $pluralKey): string
+    private function formatUnit(int|float $count, string $singularKey, string $pluralKey): string
     {
-        $unit = $this->translate($count === 1 ? $singularKey : $pluralKey);
+        $unit = $this->translate($count == 1 ? $singularKey : $pluralKey);
+        $formattedCount = is_float($count) ? number_format($count, 1) : (string)$count;
 
-        return $count . ' ' . $unit;
+        return $formattedCount . ' ' . $unit;
     }
 
     private function translate(string $key): string
