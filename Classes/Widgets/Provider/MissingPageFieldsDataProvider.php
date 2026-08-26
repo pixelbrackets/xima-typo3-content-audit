@@ -56,7 +56,7 @@ class MissingPageFieldsDataProvider implements ListDataProviderInterface
     {
         $matchingPages = $this->fetchMatchingItems();
         $matchCount = count($matchingPages);
-        $totalCount = $this->pageCountProvider->getTotalPageCount($this->excludePageUids);
+        $totalCount = $this->pageCountProvider->getTotalPageCount();
 
         // Check if user has access to edit page record
         $accessiblePages = [];

@@ -25,6 +25,8 @@ class PageCountProvider
     }
 
     /**
+    * Counts all eligible pages
+    *
     * @param array<int> $excludePageUids
     */
     public function getTotalPageCount(array $excludePageUids = []): int
