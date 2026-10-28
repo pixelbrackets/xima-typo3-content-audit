@@ -26,6 +26,8 @@ Available widgets:
   - The field may be configured, e.g. to check for missing copyright information instead of alternative text
 - Broken Links: Display pages with broken internal links detected by the TYPO3 linkvalidator
   - **Note:** Requires the `typo3/cms-linkvalidator` extension to be installed and configured
+- Searches without results: Display search terms which return no results, a hint for missing content
+  - **Note:** Requires the `typo3/cms-indexed-search` extension to be installed
 - Recent Changes: Displays a list of pages and content elements that have been created or
   updated recently, including who made the change
 - Daily Content Mission: Shows daily motivational messages to encourage editors to improve content quality

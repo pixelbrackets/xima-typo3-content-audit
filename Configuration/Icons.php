@@ -45,6 +45,10 @@ return [
         'provider' => SvgIconProvider::class,
         'source' => 'EXT:xima_typo3_content_audit/Resources/Public/Icons/WidgetsBrokenLinks.svg',
     ],
+    'content-audit-widgets-searches-without-results' => [
+        'provider' => SvgIconProvider::class,
+        'source' => 'EXT:xima_typo3_content_audit/Resources/Public/Icons/WidgetsSearchesWithoutResults.svg',
+    ],
     'content-audit-widgets-recent-changes' => [
         'provider' => SvgIconProvider::class,
         'source' => 'EXT:xima_typo3_content_audit/Resources/Public/Icons/WidgetsRecentChanges.svg',

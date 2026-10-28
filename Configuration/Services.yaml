@@ -35,6 +35,9 @@ parameters:
     missingField: 'alternative'
   xima_typo3_content_audit.widgets.broken_links.options:
     refreshAvailable: true
+  xima_typo3_content_audit.widgets.searches_without_results.options:
+    refreshAvailable: true
+    thresholdDays: 90
   xima_typo3_content_audit.widgets.recent_changes.options:
     refreshAvailable: true
     excludePageUids: []
@@ -233,6 +236,22 @@ services:
         title: 'LLL:EXT:xima_typo3_content_audit/Resources/Private/Language/locallang.xlf:widgets.broken_links.title'
         description: 'LLL:EXT:xima_typo3_content_audit/Resources/Private/Language/locallang.xlf:widgets.broken_links.description'
         iconIdentifier: 'content-audit-widgets-broken-links'
+        height: 'medium'
+        width: 'medium'
+
+  Xima\XimaTypo3ContentAudit\Widgets\SearchesWithoutResults:
+    class: 'Xima\XimaTypo3ContentAudit\Widgets\SearchesWithoutResults'
+    arguments:
+      $backendViewFactory: '@TYPO3\CMS\Backend\View\BackendViewFactory'
+      $dataProvider: '@Xima\XimaTypo3ContentAudit\Widgets\Provider\SearchesWithoutResultsDataProvider'
+      $options: '%xima_typo3_content_audit.widgets.searches_without_results.options%'
+    tags:
+      - name: dashboard.widget
+        identifier: 'contentAuditSearchesWithoutResults'
+        groupNames: 'content'
+        title: 'LLL:EXT:xima_typo3_content_audit/Resources/Private/Language/locallang.xlf:widgets.searches_without_results.title'
+        description: 'LLL:EXT:xima_typo3_content_audit/Resources/Private/Language/locallang.xlf:widgets.searches_without_results.description'
+        iconIdentifier: 'content-audit-widgets-searches-without-results'
         height: 'medium'
         width: 'medium'
 

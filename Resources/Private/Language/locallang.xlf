@@ -327,6 +327,34 @@
                 <source>This widget requires the TYPO3 linkvalidator extension "typo3/cms-linkvalidator". Please ask your system administrator to install it.</source>
             </trans-unit>
 
+            <trans-unit id="widgets.searches_without_results.title">
+                <source>Searches without results</source>
+            </trans-unit>
+            <trans-unit id="widgets.searches_without_results.description">
+                <source>Display search terms which returned no results.</source>
+            </trans-unit>
+            <trans-unit id="widgets.searches_without_results.results">
+                <source>Search terms of the last %1$d days which returned no results.</source>
+            </trans-unit>
+            <trans-unit id="widgets.searches_without_results.count">
+                <source>%1$d of %2$d search terms.</source>
+            </trans-unit>
+            <trans-unit id="widgets.searches_without_results.empty">
+                <source>Yay! Every search term of this period exists in the search index.</source>
+            </trans-unit>
+            <trans-unit id="widgets.searches_without_results.search_word">
+                <source>Search term</source>
+            </trans-unit>
+            <trans-unit id="widgets.searches_without_results.search_count">
+                <source>Searches</source>
+            </trans-unit>
+            <trans-unit id="widgets.searches_without_results.last_searched">
+                <source>Last searched</source>
+            </trans-unit>
+            <trans-unit id="widgets.searches_without_results.extension_required">
+                <source>This widget requires the TYPO3 indexed search extension "typo3/cms-indexed-search". Please ask your system administrator to install it.</source>
+            </trans-unit>
+
             <trans-unit id="widgets.recent_changes.title">
                 <source>Recent Changes</source>
             </trans-unit>

@@ -19,6 +19,7 @@ return [
             'contentAuditMissingPageFields',
             'contentAuditMissingImageFields',
             'contentAuditBrokenLinks',
+            'contentAuditSearchesWithoutResults',
             'contentAuditRecentChanges',
             'contentAuditContentStatistics',
         ],

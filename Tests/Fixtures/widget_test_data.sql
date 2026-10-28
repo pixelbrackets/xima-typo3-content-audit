@@ -142,3 +142,23 @@ VALUES
     (402, 1, 'Fresh page 1 (DE)', '/de/fresh-page-1', 1, 103, 103, 1, 1, 31, 31, 1, 1, 0, '', UNIX_TIMESTAMP()),
     (403, 1, 'Page with many broken links (DE)', '/de/page-with-many-broken-links', 1, 200, 200, 1, 1, 31, 31, 1, 1, 0, '', UNIX_TIMESTAMP()),
     (404, 1, 'Recently created page (DE)', '/de/recently-created-page', 1, 300, 300, 1, 1, 31, 31, 1, 1, 0, '', UNIX_TIMESTAMP());
+
+-- Search log and search index for zero result searches test
+INSERT INTO `index_words`
+    (`wid`, `baseword`)
+VALUES
+    ('1', 'contact'),
+    ('2', 'research');
+INSERT INTO `index_stat_word`
+    (`word`, `tstamp`, `pageid`)
+VALUES
+    ('library', UNIX_TIMESTAMP() - 86400 * 2, 1),
+    ('library', UNIX_TIMESTAMP() - 86400 * 5, 1),
+    ('library', UNIX_TIMESTAMP() - 86400 * 9, 1),
+    ('opening hours', UNIX_TIMESTAMP() - 86400, 1),
+    ('opening hours', UNIX_TIMESTAMP() - 86400 * 20, 1),
+    ('vacancies', UNIX_TIMESTAMP() - 86400 * 3, 1),
+    ('contact', UNIX_TIMESTAMP() - 86400, 1),
+    ('contact', UNIX_TIMESTAMP() - 86400 * 4, 1),
+    ('research', UNIX_TIMESTAMP() - 86400 * 6, 1),
+    ('holidays', UNIX_TIMESTAMP() - 86400 * 200, 1);

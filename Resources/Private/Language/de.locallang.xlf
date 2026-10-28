@@ -431,6 +431,43 @@
                 <target>Dieses Widget benötigt die TYPO3 Linkvalidator Extension „typo3/cms-linkvalidator". Bitte bitten Sie ihre Systemadministration, diese zu installieren.</target>
             </trans-unit>
 
+            <trans-unit id="widgets.searches_without_results.title">
+                <source />
+                <target>Suchen ohne Treffer</target>
+            </trans-unit>
+            <trans-unit id="widgets.searches_without_results.description">
+                <source />
+                <target>Zeigt Suchbegriffe ohne Treffer.</target>
+            </trans-unit>
+            <trans-unit id="widgets.searches_without_results.results">
+                <source />
+                <target>Suchbegriffe der letzten %1$d Tage ohne Treffer.</target>
+            </trans-unit>
+            <trans-unit id="widgets.searches_without_results.count">
+                <source />
+                <target>%1$d von %2$d Suchbegriffen.</target>
+            </trans-unit>
+            <trans-unit id="widgets.searches_without_results.empty">
+                <source />
+                <target>Yay! Alle Suchbegriffe dieses Zeitraums kommen im Suchindex vor.</target>
+            </trans-unit>
+            <trans-unit id="widgets.searches_without_results.search_word">
+                <source />
+                <target>Suchbegriff</target>
+            </trans-unit>
+            <trans-unit id="widgets.searches_without_results.search_count">
+                <source />
+                <target>Suchen</target>
+            </trans-unit>
+            <trans-unit id="widgets.searches_without_results.last_searched">
+                <source />
+                <target>Zuletzt gesucht</target>
+            </trans-unit>
+            <trans-unit id="widgets.searches_without_results.extension_required">
+                <source />
+                <target>Dieses Widget benötigt die TYPO3 Indexed Search Extension „typo3/cms-indexed-search“. Bitte bitten Sie ihre Systemadministration, diese zu installieren.</target>
+            </trans-unit>
+
             <trans-unit id="widgets.recent_changes.title">
                 <source />
                 <target>Aktuelle Änderungen</target>
