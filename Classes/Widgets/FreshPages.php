@@ -47,6 +47,8 @@ class FreshPages implements WidgetInterface, RequestAwareWidgetInterface
 
         $this->dataProvider->setExcludePageUids($this->options['excludePageUids'] ?? []);
         $this->dataProvider->setShowOldestFirst(false);
+        $thresholdDays = (int)($this->options['thresholdDays'] ?? 180);
+        $this->dataProvider->setThresholdDays($thresholdDays);
 
         $resultSet = $this->dataProvider->getItems();
         $view->assignMultiple([
@@ -56,6 +58,7 @@ class FreshPages implements WidgetInterface, RequestAwareWidgetInterface
             'options' => $this->options,
             'matchCount' => $resultSet['matchCount'],
             'totalCount' => $resultSet['totalCount'],
+            'thresholdDays' => $thresholdDays,
             'version' => GeneralUtility::makeInstance(Typo3Version::class)->getMajorVersion(),
             'pageTreeFilterToken' => PageTreeFilterListener::TOKEN_FRESH_PAGES,
         ]);

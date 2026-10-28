@@ -18,7 +18,7 @@ class ContentStatisticsDataProvider implements ListDataProviderInterface
 {
     private const PAGE_DOKTYPES = [1, 4];
 
-    private const ACTIVE_USER_THRESHOLD_DAYS = 90;
+    protected int $activeUserThresholdDays = 90;
 
     public function __construct(
         private readonly ConnectionPool $connectionPool,
@@ -29,8 +29,13 @@ class ContentStatisticsDataProvider implements ListDataProviderInterface
     ) {
     }
 
+    public function setActiveUserThresholdDays(int $activeUserThresholdDays): void
+    {
+        $this->activeUserThresholdDays = $activeUserThresholdDays;
+    }
+
     /**
-    * @return array{results: list<array{label: string, value: string}>}
+    * @return array{results: list<array{label: string, value: string, labelArguments?: list<int>}>}
     */
     public function getItems(): array
     {
@@ -52,7 +57,7 @@ class ContentStatisticsDataProvider implements ListDataProviderInterface
                 ['label' => 'files_total', 'value' => (string)$this->countRows('sys_file')],
                 // People
                 ['label' => 'backend_users', 'value' => (string)$this->countRows('be_users', 'disable')],
-                ['label' => 'active_backend_users', 'value' => (string)$this->countActiveBackendUsers()],
+                ['label' => 'active_backend_users', 'value' => (string)$this->countActiveBackendUsers(), 'labelArguments' => [$this->activeUserThresholdDays]],
                 ['label' => 'frontend_users', 'value' => (string)$this->countRows('fe_users', 'disable')],
                 // Site structure
                 ['label' => 'languages_total', 'value' => (string)(count($this->siteLanguageProvider->getAdditionalLanguageUids()) + 1)],
@@ -167,7 +172,7 @@ class ContentStatisticsDataProvider implements ListDataProviderInterface
     }
 
     /**
-    * Counts backend users who logged in within the last ACTIVE_USER_THRESHOLD_DAYS days
+    * Counts backend users who logged in within the last activeUserThresholdDays days
     */
     private function countActiveBackendUsers(): int
     {
@@ -180,7 +185,7 @@ class ContentStatisticsDataProvider implements ListDataProviderInterface
                 $queryBuilder->expr()->eq('disable', $queryBuilder->createNamedParameter(0, Connection::PARAM_INT)),
                 $queryBuilder->expr()->gte(
                     'lastlogin',
-                    $queryBuilder->createNamedParameter(strtotime('-' . self::ACTIVE_USER_THRESHOLD_DAYS . ' days'), Connection::PARAM_INT)
+                    $queryBuilder->createNamedParameter(strtotime('-' . $this->activeUserThresholdDays . ' days'), Connection::PARAM_INT)
                 )
             )
             ->executeQuery()

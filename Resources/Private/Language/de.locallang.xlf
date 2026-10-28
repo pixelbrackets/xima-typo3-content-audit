@@ -92,7 +92,7 @@
             </trans-unit>
             <trans-unit id="widgets.stale_pages.results">
                 <source />
-                <target>Seiten bei denen Eigenschaften oder Inhalte seit mehr als 180 Tagen nicht verändert wurden.</target>
+                <target>Seiten bei denen Eigenschaften oder Inhalte seit mehr als %d Tagen nicht verändert wurden.</target>
             </trans-unit>
             <trans-unit id="widgets.stale_pages.count">
                 <source />
@@ -137,7 +137,7 @@
             </trans-unit>
             <trans-unit id="widgets.fresh_pages.results">
                 <source />
-                <target>Seiten bei denen Eigenschaften oder Inhalte in den letzten 180 Tagen verändert wurden.</target>
+                <target>Seiten bei denen Eigenschaften oder Inhalte in den letzten %d Tagen verändert wurden.</target>
             </trans-unit>
             <trans-unit id="widgets.fresh_pages.count">
                 <source />
@@ -182,7 +182,7 @@
             </trans-unit>
             <trans-unit id="widgets.hidden_pages.results">
                 <source />
-                <target>Seiten die schon längere Zeit ausgeblendet sind.</target>
+                <target>Seiten die seit mehr als %d Tagen ausgeblendet sind.</target>
             </trans-unit>
             <trans-unit id="widgets.hidden_pages.count">
                 <source />
@@ -219,7 +219,7 @@
             </trans-unit>
             <trans-unit id="widgets.hidden_content.results">
                 <source />
-                <target>Inhalte die schon längere Zeit ausgeblendet sind.</target>
+                <target>Inhalte die seit mehr als %d Tagen ausgeblendet sind.</target>
             </trans-unit>
             <trans-unit id="widgets.hidden_content.count">
                 <source />
@@ -526,7 +526,7 @@
             </trans-unit>
             <trans-unit id="widgets.content_statistics.label_active_backend_users">
                 <source />
-                <target>Aktive Backend-Benutzer (letzte 90 Tage)</target>
+                <target>Aktive Backend-Benutzer (letzte %d Tage)</target>
             </trans-unit>
             <trans-unit id="widgets.content_statistics.label_frontend_users">
                 <source />

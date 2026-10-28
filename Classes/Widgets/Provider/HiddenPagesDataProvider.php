@@ -19,6 +19,8 @@ class HiddenPagesDataProvider implements ListDataProviderInterface
     */
     protected array $excludePageUids = [];
 
+    protected int $thresholdDays = 365;
+
     public function __construct(
         protected readonly PagePreviewUrlProvider $previewUrlProvider,
         private readonly PageCountProvider $pageCountProvider,
@@ -32,6 +34,11 @@ class HiddenPagesDataProvider implements ListDataProviderInterface
     public function setExcludePageUids(array $excludePageUids): void
     {
         $this->excludePageUids = $excludePageUids;
+    }
+
+    public function setThresholdDays(int $thresholdDays): void
+    {
+        $this->thresholdDays = $thresholdDays;
     }
 
     /**
@@ -89,7 +96,7 @@ class HiddenPagesDataProvider implements ListDataProviderInterface
                 $queryBuilder->expr()->eq('hidden', $queryBuilder->createNamedParameter(1, Connection::PARAM_INT)),
                 $queryBuilder->expr()->lt(
                     'tstamp',
-                    $queryBuilder->createNamedParameter(strtotime('-365 days'), Connection::PARAM_INT)
+                    $queryBuilder->createNamedParameter(strtotime('-' . $this->thresholdDays . ' days'), Connection::PARAM_INT)
                 )
             )
             ->orderBy('updated', 'ASC')

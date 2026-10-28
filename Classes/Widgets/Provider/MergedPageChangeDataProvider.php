@@ -25,6 +25,8 @@ class MergedPageChangeDataProvider implements ListDataProviderInterface
 
     protected bool $showOldestFirst = true;
 
+    protected int $thresholdDays = 180;
+
     public function __construct(
         protected readonly PagePreviewUrlProvider $previewUrlProvider,
         private readonly PageCountProvider $pageCountProvider,
@@ -35,6 +37,14 @@ class MergedPageChangeDataProvider implements ListDataProviderInterface
     public function setShowOldestFirst(bool $oldestFirst): void
     {
         $this->showOldestFirst = $oldestFirst;
+    }
+
+    /**
+    * Stale pages are older than this many days, fresh pages are newer
+    */
+    public function setThresholdDays(int $thresholdDays): void
+    {
+        $this->thresholdDays = $thresholdDays;
     }
 
     /**
@@ -117,7 +127,7 @@ class MergedPageChangeDataProvider implements ListDataProviderInterface
         return $connection->executeQuery(
             $sql,
             [
-                'timestamp' => strtotime('-180 days'),
+                'timestamp' => strtotime('-' . $this->thresholdDays . ' days'),
                 'uids' => empty($this->excludePageUids) ? [0] : $this->excludePageUids, // »0« workaround for valid sql
             ],
             [

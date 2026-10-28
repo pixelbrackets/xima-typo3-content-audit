@@ -70,7 +70,7 @@
                 <source>Displays a list of pages that have not been changed for a long time.</source>
             </trans-unit>
             <trans-unit id="widgets.stale_pages.results">
-                <source>Pages whose properties or content have not been changed for more than 180 days.</source>
+                <source>Pages whose properties or content have not been changed for more than %d days.</source>
             </trans-unit>
             <trans-unit id="widgets.stale_pages.count">
                 <source>%1$d of %2$d pages.</source>
@@ -104,7 +104,7 @@
                 <source>Displays a list of pages that have been changed recently.</source>
             </trans-unit>
             <trans-unit id="widgets.fresh_pages.results">
-                <source>Pages whose properties or content have been changed within the last 180 days.</source>
+                <source>Pages whose properties or content have been changed within the last %d days.</source>
             </trans-unit>
             <trans-unit id="widgets.fresh_pages.count">
                 <source>%1$d of %2$d pages.</source>
@@ -138,7 +138,7 @@
                 <source>Display a list of pages that have been hidden for a long time and may no longer be relevant.</source>
             </trans-unit>
             <trans-unit id="widgets.hidden_pages.results">
-                <source>Pages that have been hidden for quite a while.</source>
+                <source>Pages that have been hidden for more than %d days.</source>
             </trans-unit>
             <trans-unit id="widgets.hidden_pages.count">
                 <source>%1$d of %2$d pages.</source>
@@ -166,7 +166,7 @@
                 <source>Display a list of content that has been hidden for a long time and may no longer be relevant.</source>
             </trans-unit>
             <trans-unit id="widgets.hidden_content.results">
-                <source>Content that has been hidden for quite a while.</source>
+                <source>Content that has been hidden for more than %d days.</source>
             </trans-unit>
             <trans-unit id="widgets.hidden_content.count">
                 <source>%1$d of %2$d content elements.</source>
@@ -398,7 +398,7 @@
                 <source>Backend users</source>
             </trans-unit>
             <trans-unit id="widgets.content_statistics.label_active_backend_users">
-                <source>Active backend users (last 90 days)</source>
+                <source>Active backend users (last %d days)</source>
             </trans-unit>
             <trans-unit id="widgets.content_statistics.label_frontend_users">
                 <source>Frontend users</source>

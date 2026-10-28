@@ -138,6 +138,7 @@ final class PageTreeFilterListener
     {
         $this->pageChangeDataProvider->setShowOldestFirst($oldestFirst);
         $this->pageChangeDataProvider->setExcludePageUids($options['excludePageUids'] ?? []);
+        $this->pageChangeDataProvider->setThresholdDays((int)($options['thresholdDays'] ?? 180));
 
         return $this->pageUids($this->pageChangeDataProvider->fetchMatchingItems());
     }
@@ -148,6 +149,7 @@ final class PageTreeFilterListener
     private function matchingHiddenPageUids(): array
     {
         $this->hiddenPagesDataProvider->setExcludePageUids($this->hiddenPagesOptions['excludePageUids'] ?? []);
+        $this->hiddenPagesDataProvider->setThresholdDays((int)($this->hiddenPagesOptions['thresholdDays'] ?? 365));
 
         return $this->pageUids($this->hiddenPagesDataProvider->fetchMatchingItems());
     }
@@ -161,6 +163,7 @@ final class PageTreeFilterListener
     private function matchingHiddenContentPageUids(): array
     {
         $this->hiddenContentDataProvider->setExcludePageUids($this->hiddenContentOptions['excludePageUids'] ?? []);
+        $this->hiddenContentDataProvider->setThresholdDays((int)($this->hiddenContentOptions['thresholdDays'] ?? 730));
 
         return array_values(array_unique($this->pageUids($this->hiddenContentDataProvider->fetchMatchingItems(), 'pid')));
     }

@@ -11,7 +11,7 @@
 <div class="widget-content-main x--content-audit-widget--main" style="padding-bottom: 12px;">
     <f:for each="{records}" as="record">
         <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
-            <span><f:translate key="widgets.content_statistics.label_{record.label}" extensionName="XimaTypo3ContentAudit"/></span>
+            <span><f:translate key="widgets.content_statistics.label_{record.label}" extensionName="XimaTypo3ContentAudit" arguments="{record.labelArguments}"/></span>
             <span class="fw-bold">{record.value}</span>
         </div>
     </f:for>

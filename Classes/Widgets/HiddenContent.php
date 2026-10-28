@@ -46,6 +46,8 @@ class HiddenContent implements WidgetInterface, RequestAwareWidgetInterface
         }
 
         $this->dataProvider->setExcludePageUids($this->options['excludePageUids'] ?? []);
+        $thresholdDays = (int)($this->options['thresholdDays'] ?? 730);
+        $this->dataProvider->setThresholdDays($thresholdDays);
 
         $resultSet = $this->dataProvider->getItems();
         $view->assignMultiple([
@@ -55,6 +57,7 @@ class HiddenContent implements WidgetInterface, RequestAwareWidgetInterface
             'options' => $this->options,
             'matchCount' => $resultSet['matchCount'],
             'totalCount' => $resultSet['totalCount'],
+            'thresholdDays' => $thresholdDays,
             'version' => GeneralUtility::makeInstance(Typo3Version::class)->getMajorVersion(),
             'pageTreeFilterToken' => PageTreeFilterListener::TOKEN_HIDDEN_CONTENT,
         ]);

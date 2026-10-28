@@ -44,6 +44,8 @@ class ContentStatistics implements WidgetInterface, RequestAwareWidgetInterface
             $view = $this->backendViewFactory->create($this->request, ['xima/xima-typo3-content-audit']);
         }
 
+        $this->dataProvider->setActiveUserThresholdDays((int)($this->options['activeUserThresholdDays'] ?? 90));
+
         $view->assignMultiple([
             'configuration' => $this->configuration,
             'records' => $this->dataProvider->getItems()['results'],

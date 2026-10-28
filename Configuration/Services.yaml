@@ -6,15 +6,19 @@ parameters:
   xima_typo3_content_audit.widgets.stale_pages.options:
     refreshAvailable: true
     excludePageUids: []
+    thresholdDays: 180
   xima_typo3_content_audit.widgets.fresh_pages.options:
     refreshAvailable: true
     excludePageUids: []
+    thresholdDays: 90
   xima_typo3_content_audit.widgets.hidden_pages.options:
     refreshAvailable: true
     excludePageUids: []
+    thresholdDays: 365
   xima_typo3_content_audit.widgets.hidden_content.options:
     refreshAvailable: true
     excludePageUids: []
+    thresholdDays: 730
   xima_typo3_content_audit.widgets.empty_pages.options:
     refreshAvailable: true
     excludePageUids: []
@@ -36,6 +40,7 @@ parameters:
     excludePageUids: []
   xima_typo3_content_audit.widgets.content_statistics.options:
     refreshAvailable: true
+    activeUserThresholdDays: 90
 
 services:
   _defaults:
