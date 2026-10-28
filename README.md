@@ -27,6 +27,7 @@ Available widgets:
 - Broken Links: Display pages with broken internal links detected by the TYPO3 linkvalidator
   - **Note:** Requires the `typo3/cms-linkvalidator` extension to be installed and configured
 - Searches without results: Display search terms which return no results, a hint for missing content
+  - Integrators may configure the threshold for how many searches are required to show a popular term in the list
   - **Note:** Requires the `typo3/cms-indexed-search` extension to be installed
 - Recent Changes: Displays a list of pages and content elements that have been created or
   updated recently, including who made the change

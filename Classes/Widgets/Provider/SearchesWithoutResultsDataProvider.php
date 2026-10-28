@@ -15,6 +15,8 @@ class SearchesWithoutResultsDataProvider implements ListDataProviderInterface
 
     protected int $thresholdDays = 90;
 
+    protected int $thresholdSearches = 1;
+
     public function __construct(
         private readonly ConnectionPool $connectionPool,
         private readonly PackageManager $packageManager
@@ -24,6 +26,11 @@ class SearchesWithoutResultsDataProvider implements ListDataProviderInterface
     public function setThresholdDays(int $thresholdDays): void
     {
         $this->thresholdDays = $thresholdDays;
+    }
+
+    public function setThresholdSearches(int $thresholdSearches): void
+    {
+        $this->thresholdSearches = $thresholdSearches;
     }
 
     /**
@@ -41,7 +48,8 @@ class SearchesWithoutResultsDataProvider implements ListDataProviderInterface
     }
 
     /**
-    * Fetch searched words which do not exist in the search index, most searched first
+    * Fetch searched words which do not exist in the search index and were searched
+    * at least the minimum number of times, most searched first
     *
     * @return list<array<string, mixed>>
     */
@@ -71,6 +79,7 @@ class SearchesWithoutResultsDataProvider implements ListDataProviderInterface
                 $queryBuilder->expr()->isNull('w.wid')
             )
             ->groupBy('s.word')
+            ->having('search_count >= ' . $queryBuilder->createNamedParameter($this->thresholdSearches, Connection::PARAM_INT))
             ->orderBy('search_count', 'DESC')
             ->addOrderBy('last_searched', 'DESC');
 

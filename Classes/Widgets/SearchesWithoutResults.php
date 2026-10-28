@@ -47,6 +47,7 @@ class SearchesWithoutResults implements WidgetInterface, RequestAwareWidgetInter
 
         $thresholdDays = (int)($this->options['thresholdDays'] ?? 90);
         $this->dataProvider->setThresholdDays($thresholdDays);
+        $this->dataProvider->setThresholdSearches((int)($this->options['thresholdSearches'] ?? 1));
 
         // Check if optional indexed_search extension is installed, otherwise we cannot show any results
         $indexedSearchIsInstalled = GeneralUtility::makeInstance(PackageManager::class)->isPackageActive('indexed_search');

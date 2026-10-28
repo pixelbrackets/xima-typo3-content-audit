@@ -38,6 +38,7 @@ parameters:
   xima_typo3_content_audit.widgets.searches_without_results.options:
     refreshAvailable: true
     thresholdDays: 90
+    thresholdSearches: 1
   xima_typo3_content_audit.widgets.recent_changes.options:
     refreshAvailable: true
     excludePageUids: []
