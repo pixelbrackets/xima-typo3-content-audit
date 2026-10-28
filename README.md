@@ -43,6 +43,22 @@ Available widgets:
 > or add a general welcome message for editors on the dashboard? Check out our
 > [dashboard news extension](https://github.com/xima-media/xima-typo3-dashboard-news).
 
+## Screenshots
+
+<details>
+<summary>Show screenshot: Dashboard with all available widgets</summary>
+
+![Dashboard with all widgets](./Documentation/screenshot-dashboard.png)
+
+</details>
+
+<details>
+<summary>Show screenshot: Page tree filtered to show all stale pages</summary>
+
+![Page tree filtered to all stale pages](./Documentation/screenshot-pagetree.png)
+
+</details>
+
 ## Requirements
 
 - PHP
