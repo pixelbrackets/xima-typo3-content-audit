@@ -10,7 +10,7 @@
     </div>
 </f:if>
 <div class="widget-content-main x--content-audit-widget--main" style="--mask: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 95%, rgba(0, 0, 0, 0) 0) 100% 90% / 100% 100% repeat-x;-webkit-mask: var(--mask);mask: var(--mask);">
-    <f:if condition="!{indexedSearchIsInstalled}">
+    <f:if condition="!{searchExtensionIsInstalled}">
         <div class="row widget-no-items-found">
             <div class="col-xs-12">
                 <p>
@@ -20,7 +20,7 @@
         </div>
     </f:if>
 
-    <f:if condition="{indexedSearchIsInstalled}">
+    <f:if condition="{searchExtensionIsInstalled}">
         <f:if condition="{records}">
             <div class="mb-3">
                 <f:translate key="widgets.searches_without_results.results" extensionName="XimaTypo3ContentAudit" arguments="{0: thresholdDays}"/>
@@ -53,7 +53,7 @@
         </f:if>
     </f:if>
 
-    <f:if condition="{indexedSearchIsInstalled}">
+    <f:if condition="{searchExtensionIsInstalled}">
         <f:if condition="!{records}">
             <div class="row widget-no-items-found">
                 <div class="col-xs-12">

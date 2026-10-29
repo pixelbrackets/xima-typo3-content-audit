@@ -465,7 +465,7 @@
             </trans-unit>
             <trans-unit id="widgets.searches_without_results.extension_required">
                 <source />
-                <target>Dieses Widget benötigt die TYPO3 Indexed Search Extension „typo3/cms-indexed-search“. Bitte bitten Sie ihre Systemadministration, diese zu installieren.</target>
+                <target>Dieses Widget benötigt die Such-Extension „tpwd/ke_search“ oder „typo3/cms-indexed-search“. Bitte bitten Sie ihre Systemadministration, eine davon zu installieren.</target>
             </trans-unit>
 
             <trans-unit id="widgets.recent_changes.title">

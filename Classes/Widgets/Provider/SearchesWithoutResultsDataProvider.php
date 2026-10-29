@@ -38,27 +38,70 @@ class SearchesWithoutResultsDataProvider implements ListDataProviderInterface
     */
     public function getItems(): array
     {
-        $matchingWords = $this->fetchMatchingItems();
+        $matchingTerms = $this->fetchMatchingItems();
 
         return [
-            'matchCount' => count($matchingWords),
-            'totalCount' => $this->fetchSearchedWordCount(),
-            'results' => array_slice($matchingWords, 0, self::DISPLAY_LIMIT),
+            'matchCount' => count($matchingTerms),
+            'totalCount' => $this->fetchSearchTermCount(),
+            'results' => array_slice($matchingTerms, 0, self::DISPLAY_LIMIT),
         ];
     }
 
     /**
-    * Fetch searched words which do not exist in the search index and were searched
-    * at least the minimum number of times, most searched first
+    * Fetch search terms without results which were searched at least
+    * the minimum number of times, most searched first
+    *
+    * Prefers ke_search over indexed_search if both are installed
     *
     * @return list<array<string, mixed>>
     */
     public function fetchMatchingItems(): array
     {
-        if (!$this->packageManager->isPackageActive('indexed_search')) {
-            return [];
+        if ($this->packageManager->isPackageActive('ke_search')) {
+            return $this->fetchKeSearchItems();
         }
+        if ($this->packageManager->isPackageActive('indexed_search')) {
+            return $this->fetchIndexedSearchItems();
+        }
+        return [];
+    }
 
+    /**
+    * ke_search logs each search phrase with its number of hits
+    *
+    * @return list<array<string, mixed>>
+    */
+    private function fetchKeSearchItems(): array
+    {
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable('tx_kesearch_stat_search');
+        $queryBuilder
+            ->select('searchphrase as searchWord')
+            ->addSelectLiteral('COUNT(uid) as search_count')
+            ->addSelectLiteral('MAX(tstamp) as last_searched')
+            ->from('tx_kesearch_stat_search')
+            ->where(
+                $queryBuilder->expr()->gte(
+                    'tstamp',
+                    $queryBuilder->createNamedParameter(strtotime('-' . $this->thresholdDays . ' days'), Connection::PARAM_INT)
+                ),
+                $queryBuilder->expr()->eq('hits', $queryBuilder->createNamedParameter(0, Connection::PARAM_INT))
+            )
+            ->groupBy('searchphrase')
+            ->having('search_count >= ' . $queryBuilder->createNamedParameter($this->thresholdSearches, Connection::PARAM_INT))
+            ->orderBy('search_count', 'DESC')
+            ->addOrderBy('last_searched', 'DESC');
+
+        return $queryBuilder->executeQuery()->fetchAllAssociative();
+    }
+
+    /**
+    * indexed_search logs single words without the number of hits,
+    * so a word counts as without results if it does not exist in the search index
+    *
+    * @return list<array<string, mixed>>
+    */
+    private function fetchIndexedSearchItems(): array
+    {
         $queryBuilder = $this->connectionPool->getQueryBuilderForTable('index_stat_word');
         $queryBuilder
             ->select('s.word as searchWord')
@@ -87,14 +130,25 @@ class SearchesWithoutResultsDataProvider implements ListDataProviderInterface
     }
 
     /**
-    * Count all distinct searched words in the given period
+    * Count all distinct search terms in the given period
     */
-    private function fetchSearchedWordCount(): int
+    private function fetchSearchTermCount(): int
     {
-        $queryBuilder = $this->connectionPool->getQueryBuilderForTable('index_stat_word');
+        if ($this->packageManager->isPackageActive('ke_search')) {
+            return $this->countDistinctTerms('tx_kesearch_stat_search', 'searchphrase');
+        }
+        if ($this->packageManager->isPackageActive('indexed_search')) {
+            return $this->countDistinctTerms('index_stat_word', 'word');
+        }
+        return 0;
+    }
+
+    private function countDistinctTerms(string $table, string $column): int
+    {
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable($table);
         $queryBuilder
-            ->selectLiteral('COUNT(DISTINCT word)')
-            ->from('index_stat_word')
+            ->selectLiteral('COUNT(DISTINCT ' . $queryBuilder->quoteIdentifier($column) . ')')
+            ->from($table)
             ->where(
                 $queryBuilder->expr()->gte(
                     'tstamp',

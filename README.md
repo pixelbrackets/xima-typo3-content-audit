@@ -28,7 +28,7 @@ Available widgets:
   - **Note:** Requires the `typo3/cms-linkvalidator` extension to be installed and configured
 - Searches without results: Display search terms which return no results, a hint for missing content
   - Integrators may configure the threshold for how many searches are required to show a popular term in the list
-  - **Note:** Requires the `typo3/cms-indexed-search` extension to be installed
+  - **Note:** Requires the `typo3/cms-indexed-search` or `tpwd/ke_search` extension to be installed
 - Recent Changes: Displays a list of pages and content elements that have been created or
   updated recently, including who made the change
 - Daily Content Mission: Shows daily motivational messages to encourage editors to improve content quality

@@ -143,7 +143,8 @@ VALUES
     (403, 1, 'Page with many broken links (DE)', '/de/page-with-many-broken-links', 1, 200, 200, 1, 1, 31, 31, 1, 1, 0, '', UNIX_TIMESTAMP()),
     (404, 1, 'Recently created page (DE)', '/de/recently-created-page', 1, 300, 300, 1, 1, 31, 31, 1, 1, 0, '', UNIX_TIMESTAMP());
 
--- Search log and search index for zero result searches test
+-- Search log and search index of indexed_search for searches without results test
+-- Logged words which are missing in the search index count as searches without results
 INSERT INTO `index_words`
     (`wid`, `baseword`)
 VALUES
@@ -162,3 +163,19 @@ VALUES
     ('contact', UNIX_TIMESTAMP() - 86400 * 4, 1),
     ('research', UNIX_TIMESTAMP() - 86400 * 6, 1),
     ('holidays', UNIX_TIMESTAMP() - 86400 * 200, 1);
+
+-- Search log of ke_search for searches without results test
+-- Logged phrases with zero hits count as searches without results
+INSERT INTO `tx_kesearch_stat_search`
+    (`pid`, `searchphrase`, `tstamp`, `hits`, `language`)
+VALUES
+    (1, 'library', UNIX_TIMESTAMP() - 86400 * 2, 0, 0),
+    (1, 'library', UNIX_TIMESTAMP() - 86400 * 5, 0, 0),
+    (1, 'library', UNIX_TIMESTAMP() - 86400 * 9, 0, 0),
+    (1, 'opening hours', UNIX_TIMESTAMP() - 86400, 0, 0),
+    (1, 'opening hours', UNIX_TIMESTAMP() - 86400 * 20, 0, 0),
+    (1, 'rooftop garden', UNIX_TIMESTAMP() - 86400 * 3, 0, 0),
+    (1, 'contact', UNIX_TIMESTAMP() - 86400, 4, 0),
+    (1, 'contact', UNIX_TIMESTAMP() - 86400 * 4, 4, 0),
+    (1, 'research', UNIX_TIMESTAMP() - 86400 * 6, 2, 0),
+    (1, 'holidays', UNIX_TIMESTAMP() - 86400 * 200, 0, 0);

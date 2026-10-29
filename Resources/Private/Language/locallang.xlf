@@ -352,7 +352,7 @@
                 <source>Last searched</source>
             </trans-unit>
             <trans-unit id="widgets.searches_without_results.extension_required">
-                <source>This widget requires the TYPO3 indexed search extension "typo3/cms-indexed-search". Please ask your system administrator to install it.</source>
+                <source>This widget requires the search extension "tpwd/ke_search" or "typo3/cms-indexed-search". Please ask your system administrator to install one of them.</source>
             </trans-unit>
 
             <trans-unit id="widgets.recent_changes.title">

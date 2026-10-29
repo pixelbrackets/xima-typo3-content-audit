@@ -49,9 +49,10 @@ class SearchesWithoutResults implements WidgetInterface, RequestAwareWidgetInter
         $this->dataProvider->setThresholdDays($thresholdDays);
         $this->dataProvider->setThresholdSearches((int)($this->options['thresholdSearches'] ?? 1));
 
-        // Check if optional indexed_search extension is installed, otherwise we cannot show any results
-        $indexedSearchIsInstalled = GeneralUtility::makeInstance(PackageManager::class)->isPackageActive('indexed_search');
-        $resultSet = $indexedSearchIsInstalled ? $this->dataProvider->getItems() : ['results' => [], 'matchCount' => 0, 'totalCount' => 0];
+        // Check if optional ke_search or indexed_search extension is installed, otherwise we cannot show any results
+        $packageManager = GeneralUtility::makeInstance(PackageManager::class);
+        $searchExtensionIsInstalled = $packageManager->isPackageActive('ke_search') || $packageManager->isPackageActive('indexed_search');
+        $resultSet = $searchExtensionIsInstalled ? $this->dataProvider->getItems() : ['results' => [], 'matchCount' => 0, 'totalCount' => 0];
 
         $view->assignMultiple([
             'configuration' => $this->configuration,
@@ -61,7 +62,7 @@ class SearchesWithoutResults implements WidgetInterface, RequestAwareWidgetInter
             'matchCount' => $resultSet['matchCount'],
             'totalCount' => $resultSet['totalCount'],
             'version' => GeneralUtility::makeInstance(Typo3Version::class)->getMajorVersion(),
-            'indexedSearchIsInstalled' => $indexedSearchIsInstalled,
+            'searchExtensionIsInstalled' => $searchExtensionIsInstalled,
             'thresholdDays' => $thresholdDays,
         ]);
         return $view->render('SearchesWithoutResults');
