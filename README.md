@@ -109,12 +109,13 @@ options.dashboard.dashboardPresetsForNewUsers = tx_ximatypo3contentaudit_dashboa
 ### Widget Configuration
 
 You may configure the widgets by adjusting the available parameters.
-Copy and paste the `parameters` section from the
-[Services.yaml](./Configuration/Services.yaml) file into your own
-and adjust the values as needed.
 
-To exclude certain pages from the stale pages widget,
-you may add this to your sitepackage:
+To do so copy and paste the `parameters` section from the
+[Services.yaml](./Configuration/Services.yaml) file into your own
+`Services.yaml` file of your sitepackage and adjust the values as needed.
+
+For example: To exclude certain pages from the stale pages widget,
+you may add this block to your sitepackage:
 
 _EXT:acme_sitepackage/Configuration/Services.yaml_
 ```yaml
@@ -123,6 +124,13 @@ parameters:
     refreshAvailable: true
     excludePageUids: [4,8,15,16,23,42]
 ```
+
+Available options for the widgets include:
+- page UIDs to exclude (e.g. hide legal pages like imprint or privacy from stale pages)
+- day thresholds for timespans (e.g. pages are stale after 180 days on a mature site, and after 60 days on a new one)
+- minimum search counts (e.g. list searches without results only after 5 hits, to filter out typos)
+- field names for the missing fields widgets (e.g. check pages for `description` instead of the default `abstract`)
+- other widget-specific settings
 
 ### Adding Multiple Widgets of the Same Type
 
