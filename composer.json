@@ -60,8 +60,12 @@
 	},
 	"extra": {
 		"typo3/cms": {
+			"Package": {
+				"providesPackages": {}
+			},
 			"cms-package-dir": "{$vendor-dir}/typo3/cms",
 			"extension-key": "xima_typo3_content_audit",
+			"version": "1.9.0",
 			"web-dir": "public"
 		}
 	},

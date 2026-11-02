@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.9.0] - 2026-11-02
+
+- Feature: Add widget for searches without results (indexed_search)
+- Feature: Add widget for searches without results (ke_search)
+- Feature: Make day thresholds of widgets configurable
+- Feature: Make search threshold of widget configurable
+- Bugfix: Ignore excludePageUids in total page count
+
 ## [1.8.0] - 2026-08-14
 
 - Feature: Add widget with content statistics
